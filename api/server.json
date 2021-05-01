@@ -1,0 +1,43 @@
+{
+    "pacientes" : [
+        {
+            "prontuario" : "1234",
+            "nome" : "Natan",
+            "rg" : "12345678-0",
+            "cpf" : "123456789-10",
+            "nomeMae" : "Maria",
+            "cadastroSus" : "123456780",
+            "medico" : "Marco",
+            "quarto" : "13",
+            "acompanhantes" : [
+            ]
+        },
+        {
+            "prontuario" : "1235",
+            "nome" : "Mauricio",
+            "rg" : "12345678-0",
+            "cpf" : "123456789-10",
+            "nomeMae" : "Maria",
+            "cadastroSus" : "123456780",
+            "medico" : "Marco",
+            "quarto" : "13",
+            "acompanhantes" : [
+                {
+                    "cpf" : "123456789-00",
+                    "rg" : "12345678-9",
+                    "nome" : "Maria"
+                }
+            ]
+        }
+    ],
+    "acompanhantes" : [
+        {
+            "cpf" : "123456789-02",
+            "rg" : "12345678-1",
+            "nome" : "Fulano",
+            "pacientes" : [
+
+            ]
+        }
+    ]
+}
