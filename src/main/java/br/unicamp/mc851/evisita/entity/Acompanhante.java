@@ -6,6 +6,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"cpf"})
 @Builder
 public class Acompanhante {

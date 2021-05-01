@@ -16,7 +16,7 @@ public class SwaggerConfig {
     public Docket evisitaApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("br.unicamp.mc851.evista"))
+                .apis(RequestHandlerSelectors.basePackage("br.unicamp.mc851.evisita"))
                 .paths(PathSelectors.ant("/**"))
                 .build();
     }

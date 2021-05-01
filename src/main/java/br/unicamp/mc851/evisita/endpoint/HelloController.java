@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/hello")
 public class HelloController {
-    @GetMapping("/hello")
+    @GetMapping
     public ResponseEntity<Object> hello() {
         return ResponseEntity.ok("Hello!");
     }
