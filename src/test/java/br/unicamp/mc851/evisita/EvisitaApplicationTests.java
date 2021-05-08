@@ -2,14 +2,14 @@ package br.unicamp.mc851.evisita;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class EvisitaApplicationTests {
 
 	@Test
 	void contextLoads() {
-		Assertions.assertTrue(true);
+		assertTrue(true);
 	}
 
 }
