@@ -25,8 +25,7 @@ public class GetAcompanhantesImpl implements GetAcompanhantes {
     public List<Acompanhante> execute() {
         List<AcompanhanteModel> acompanhanteModels = repository.findAll();
         List<Acompanhante> acompanhantes = new ArrayList<>();
-        acompanhanteModels.stream()
-                .forEach(model ->
+        acompanhanteModels.forEach(model ->
                         acompanhantes.add(AcompanhanteModelAdapter.modelToEntity(model)));
         return acompanhantes;
     }

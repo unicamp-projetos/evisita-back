@@ -25,8 +25,7 @@ public class GetPacienteImpl implements GetPacientes {
     public List<Paciente> execute() {
         List<PacienteModel> pacienteModels = repository.findAll();
         List<Paciente> pacientes = new ArrayList<>();
-        pacienteModels.stream()
-                .forEach(model ->
+        pacienteModels.forEach(model ->
                         pacientes.add(PacienteModelAdapter.modelToEntity(model)));
         return pacientes;
     }
