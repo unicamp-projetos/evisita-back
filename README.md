@@ -1,1 +1,1 @@
-- docker-compose build --no-cache && docker-compose up          #Subir banco de dados no docker
+- docker-compose build  && docker-compose up          #Subir banco de dados no docker
