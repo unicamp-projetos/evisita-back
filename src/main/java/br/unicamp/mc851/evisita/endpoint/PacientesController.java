@@ -18,9 +18,8 @@ public class PacientesController {
     @Autowired
     GetPacientesVM pacientesVM;
 
-
     @Autowired
-    SavePacientesVMImpl savePacientesVMImpl;
+    SavePacientesVM savePacientesVM;
 
     @GetMapping
     public ResponseEntity<Object> getPacientes() {
@@ -32,7 +31,7 @@ public class PacientesController {
     public ResponseEntity<PacienteVM> createPaciente(
             @RequestBody  final PacienteVM pacienteVM) {
 
-        final Paciente paciente = savePacientesVMImpl.execute(PacienteVMAdapter.viewModelToEntity(pacienteVM));
+        final Paciente paciente = savePacientesVM.execute(PacienteVMAdapter.viewModelToEntity(pacienteVM));
         final PacienteVM result = PacienteVMAdapter.entityToViewModel(paciente);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
 
