@@ -1,6 +1,7 @@
 package br.unicamp.mc851.evisita.external.repository.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -26,7 +27,8 @@ public class PacienteModel {
     private String quarto;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "paciente_acompanhante",
             joinColumns = @JoinColumn(name = "paciente_prontuario_pk"),

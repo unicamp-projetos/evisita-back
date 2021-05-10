@@ -2,10 +2,7 @@ package br.unicamp.mc851.evisita.viewmodel;
 
 // TODO
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
+@Builder
 public class PacienteVM {
     private String prontuario;
     private String nome;

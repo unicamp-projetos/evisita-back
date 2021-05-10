@@ -21,6 +21,6 @@ public class AcompanhanteModel {
     private String nome;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
-    @ManyToMany(mappedBy = "acompanhantes")
+    @ManyToMany(mappedBy = "acompanhantes", cascade = CascadeType.ALL)
     Set<PacienteModel> pacientes;
 }

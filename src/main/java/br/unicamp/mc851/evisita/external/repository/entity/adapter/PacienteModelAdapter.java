@@ -29,10 +29,11 @@ public class PacienteModelAdapter {
 
     private static List<Acompanhante> getAcompanhantesList(@NonNull PacienteModel pacienteModel) {
         List<Acompanhante> acompanhantes = new ArrayList<>();
-        pacienteModel.getAcompanhantes()
-                .stream()
-                .forEach(model ->
-                    acompanhantes.add(AcompanhanteModelAdapter.modelToEntity(model)));
+        if(pacienteModel.getAcompanhantes()!=null)
+            pacienteModel.getAcompanhantes()
+                    .stream()
+                    .forEach(model ->
+                        acompanhantes.add(AcompanhanteModelAdapter.modelToEntity(model)));
         return acompanhantes;
     }
 
@@ -54,7 +55,8 @@ public class PacienteModelAdapter {
 
     private static Set<AcompanhanteModel> getAcompanhantesSet(@NonNull Paciente paciente) {
         Set<AcompanhanteModel> acompanhantes = new HashSet<>();
-        paciente.getAcompanhantes()
+        if(paciente.getAcompanhantes()!=null)
+            paciente.getAcompanhantes()
                 .stream()
                 .forEach(entity ->
                         acompanhantes.add(AcompanhanteModelAdapter.entityToModel(entity)));
