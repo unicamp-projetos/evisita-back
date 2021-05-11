@@ -1,0 +1,1 @@
+- docker-compose build  && docker-compose up          #Subir banco de dados no docker
