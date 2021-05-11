@@ -15,7 +15,7 @@ public class SavePacientesImpl implements SavePacientes {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-    public Paciente execute(final Paciente paciente){
+    public Paciente execute(Paciente paciente) {
         PacienteModel model = PacienteModelAdapter.entityToModel(paciente);
         return PacienteModelAdapter.modelToEntity(pacienteRepository.save(model));
     }

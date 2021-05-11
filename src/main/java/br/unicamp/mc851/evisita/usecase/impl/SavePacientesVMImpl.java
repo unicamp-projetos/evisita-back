@@ -11,7 +11,7 @@ public class SavePacientesVMImpl implements SavePacientesVM {
     @Autowired
     SavePacientes savePacientes;
 
-    public Paciente execute(final Paciente paciente) {
+    public Paciente execute(Paciente paciente) {
         return savePacientes.execute(paciente);
     }
 }

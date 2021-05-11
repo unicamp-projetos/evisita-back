@@ -1,14 +1,15 @@
 package br.unicamp.mc851.evisita.viewmodel;
 
-import br.unicamp.mc851.evisita.entity.Paciente;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Builder
 public class AcompanhanteVM {
     private String cpf;

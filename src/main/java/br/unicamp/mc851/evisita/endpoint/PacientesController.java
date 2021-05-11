@@ -1,40 +1,53 @@
 package br.unicamp.mc851.evisita.endpoint;
 
-import br.unicamp.mc851.evisita.entity.Paciente;
 import br.unicamp.mc851.evisita.usecase.GetPacientesVM;
 import br.unicamp.mc851.evisita.usecase.SavePacientesVM;
-import br.unicamp.mc851.evisita.usecase.impl.SavePacientesVMImpl;
 import br.unicamp.mc851.evisita.viewmodel.PacienteVM;
 import br.unicamp.mc851.evisita.viewmodel.adapter.PacienteVMAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/pacientes")
+@RequestMapping(value = "/pacientes",
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public class PacientesController {
 
-    @Autowired
-    GetPacientesVM pacientesVM;
+    private SavePacientesVM savePacientesVM;
+    private GetPacientesVM getPacientesVM;
 
     @Autowired
-    SavePacientesVM savePacientesVM;
+    public PacientesController(
+            SavePacientesVM savePacientesVM,
+            GetPacientesVM getPacientesVM
+    ) {
+        this.getPacientesVM = getPacientesVM;
+        this.savePacientesVM = savePacientesVM;
+    }
 
     @GetMapping
     public ResponseEntity<Object> getPacientes() {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        List<PacienteVM> pacienteVMS = getPacientesVM.execute();
+        if (pacienteVMS.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } else {
+            return ResponseEntity.ok(pacienteVMS);
+        }
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PacienteVM> createPaciente(
-            @RequestBody  final PacienteVM pacienteVM) {
+            @RequestBody final PacienteVM pacienteVM) {
 
-        final Paciente paciente = savePacientesVM.execute(PacienteVMAdapter.viewModelToEntity(pacienteVM));
-        final PacienteVM result = PacienteVMAdapter.entityToViewModel(paciente);
+        var paciente = savePacientesVM.execute(PacienteVMAdapter.viewModelToEntity(pacienteVM));
+        var result = PacienteVMAdapter.entityToViewModel(paciente);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
-
     }
 
 }

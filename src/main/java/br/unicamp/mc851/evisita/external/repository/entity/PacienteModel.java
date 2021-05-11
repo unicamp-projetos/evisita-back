@@ -9,8 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "paciente")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

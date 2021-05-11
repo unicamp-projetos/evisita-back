@@ -1,15 +1,12 @@
 package br.unicamp.mc851.evisita.viewmodel;
 
-// TODO
-
 import lombok.*;
 
 import java.util.List;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Builder
 public class PacienteVM {
     private String prontuario;
