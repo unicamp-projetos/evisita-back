@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AcompanhanteModelAdapter {
+
+    private AcompanhanteModelAdapter() {}
 
     public static Acompanhante modelToEntity(@NonNull AcompanhanteModel acompanhanteModel) {
         return Acompanhante.builder()
@@ -23,12 +26,13 @@ public class AcompanhanteModelAdapter {
                 .build();
     }
 
-    private static List<Paciente> getPacientesList(Set<PacienteModel> pacienteModels) {
-        List<Paciente> pacientes = new ArrayList<>();
-        pacienteModels.stream()
-                .forEach(model ->
-                        pacientes.add(PacienteModelAdapter.modelToEntity(model)));
-        return pacientes;
+    private static List<Paciente> getPacientesList(@NonNull Set<PacienteModel> pacienteModels) {
+        if (pacienteModels.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return pacienteModels.stream()
+                .map(PacienteModelAdapter::modelToEntity)
+                .collect(Collectors.toList());
     }
 
     public static AcompanhanteModel entityToModel(@NonNull Acompanhante acompanhante) {
@@ -42,11 +46,22 @@ public class AcompanhanteModelAdapter {
                 .build();
     }
 
-    private static Set<PacienteModel> getPacientesSet(List<Paciente> pacientes) {
-        Set<PacienteModel> pacienteModels = new HashSet<>();
-        pacientes.stream()
-                .forEach(entity ->
-                        pacienteModels.add(PacienteModelAdapter.entityToModel(entity)));
-        return pacienteModels;
+    private static Set<PacienteModel> getPacientesSet(@NonNull List<Paciente> pacientes) {
+        if (pacientes.isEmpty()) {
+            return new HashSet<>();
+        }
+        return pacientes.stream()
+                .map(PacienteModelAdapter::entityToModel)
+                .collect(Collectors.toSet());
+
+    }
+
+    public static List<Acompanhante> modelListToEntityList(@NonNull List<AcompanhanteModel> acompanhanteModels) {
+        if (acompanhanteModels.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return acompanhanteModels.stream()
+                .map(AcompanhanteModelAdapter::modelToEntity)
+                .collect(Collectors.toList());
     }
 }

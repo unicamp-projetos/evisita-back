@@ -1,22 +1,22 @@
 package br.unicamp.mc851.evisita.external.repository.impl;
 
 import br.unicamp.mc851.evisita.entity.Paciente;
-import br.unicamp.mc851.evisita.external.repository.SavePacientes;
+import br.unicamp.mc851.evisita.external.repository.GetPacientes;
 import br.unicamp.mc851.evisita.external.repository.database.PacienteRepository;
 import br.unicamp.mc851.evisita.external.repository.entity.adapter.PacienteModelAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SavePacientesImpl implements SavePacientes {
+public class GetPacientesImpl implements GetPacientes {
 
-    private final PacienteRepository pacienteRepository;
+    private final PacienteRepository repository;
 
-    public Paciente execute(Paciente paciente) {
-        var model = PacienteModelAdapter.entityToModel(paciente);
-        return PacienteModelAdapter.modelToEntity(pacienteRepository.save(model));
+    @Override
+    public List<Paciente> execute() {
+        return PacienteModelAdapter.modelListToEntityList(repository.findAll());
     }
-
 }

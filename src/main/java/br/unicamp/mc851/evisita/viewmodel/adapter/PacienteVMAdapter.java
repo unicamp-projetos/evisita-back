@@ -1,23 +1,17 @@
 package br.unicamp.mc851.evisita.viewmodel.adapter;
 
-import br.unicamp.mc851.evisita.entity.Acompanhante;
 import br.unicamp.mc851.evisita.entity.Paciente;
-import br.unicamp.mc851.evisita.viewmodel.AcompanhanteVM;
 import br.unicamp.mc851.evisita.viewmodel.PacienteVM;
+import lombok.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PacienteVMAdapter {
 
-    public static PacienteVM entityToViewModel(final Paciente entity) {
-        List<AcompanhanteVM> acompanhantes = new ArrayList<>();
-        if(entity.getAcompanhantes()!=null)
-            entity.getAcompanhantes()
-                    .stream()
-                    .forEach(model ->
-                            acompanhantes.add(AcompanhanteVMAdapter.entityToViewModel(model)));
+    private PacienteVMAdapter() {}
 
+    public static PacienteVM entityToViewModel(@NonNull Paciente entity) {
         return  PacienteVM.builder()
                 .prontuario(entity.getProntuario())
                 .nome(entity.getNome())
@@ -27,19 +21,10 @@ public class PacienteVMAdapter {
                 .cadastroSus(entity.getCadastroSus())
                 .medico(entity.getMedico())
                 .quarto(entity.getQuarto())
-                .acompanhantes(acompanhantes)
                 .build();
     }
 
-    public static Paciente viewModelToEntity(final PacienteVM viewModel) {
-        List<Acompanhante> acompanhantes = new ArrayList<>();
-        if(viewModel.getAcompanhantes()!=null)
-            viewModel.getAcompanhantes()
-                    .stream()
-                    .forEach(model ->
-                            acompanhantes.add(AcompanhanteVMAdapter.viewModelToEntity(model)));
-
-
+    public static Paciente viewModelToEntity(@NonNull PacienteVM viewModel) {
         return Paciente.builder()
                 .prontuario(viewModel.getProntuario())
                 .nome(viewModel.getNome())
@@ -49,11 +34,13 @@ public class PacienteVMAdapter {
                 .cadastroSus(viewModel.getCadastroSus())
                 .medico(viewModel.getMedico())
                 .quarto(viewModel.getQuarto())
-                .acompanhantes(acompanhantes)
                 .build();
     }
 
-
-
+    public static List<PacienteVM> entityListToViewModelList(@NonNull List<Paciente> pacientes) {
+        return pacientes.stream()
+                .map(PacienteVMAdapter::entityToViewModel)
+                .collect(Collectors.toList());
+    }
 
 }

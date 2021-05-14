@@ -1,9 +1,7 @@
 package br.unicamp.mc851.evisita.builder;
 
-import br.unicamp.mc851.evisita.viewmodel.AcompanhanteVM;
 import br.unicamp.mc851.evisita.viewmodel.PacienteVM;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +17,6 @@ public class PacienteVMBuilder {
                 .prontuario("123456789")
                 .quarto("123456789")
                 .rg("123456789")
-                .acompanhantes(new ArrayList<AcompanhanteVM>())
                 .build();
     }
 

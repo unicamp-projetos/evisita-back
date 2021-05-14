@@ -1,8 +1,9 @@
 package br.unicamp.mc851.evisita.viewmodel;
 
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -17,5 +18,4 @@ public class PacienteVM {
     private String cadastroSus;
     private String medico;
     private String quarto;
-    List<AcompanhanteVM> acompanhantes;
 }
