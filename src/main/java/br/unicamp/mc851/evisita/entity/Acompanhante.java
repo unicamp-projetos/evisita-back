@@ -4,7 +4,7 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"cpf"})

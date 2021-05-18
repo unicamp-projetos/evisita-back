@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+// TODO: banco não retorna pacientes
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +20,10 @@ public class GetPacientesImpl implements GetPacientes {
 
     @Override
     public List<Paciente> execute() {
-        return PacienteModelAdapter.modelListToEntityList(repository.findAll());
+        var pacienteModels = repository.findAll();
+        System.out.println(pacienteModels); // aqui "testa" se pelo menos o repository conseguiu recuperar os dados
+        return pacienteModels.stream()
+                .map(PacienteModelAdapter::modelToEntity)
+                .collect(Collectors.toList());
     }
 }

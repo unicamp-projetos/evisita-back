@@ -29,7 +29,7 @@ public class PacienteModel {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "paciente_acompanhante",
             joinColumns = @JoinColumn(name = "paciente_prontuario_pk"),

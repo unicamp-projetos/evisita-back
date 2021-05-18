@@ -1,4 +1,4 @@
-package br.unicamp.mc851.evisita.viewmodel;
+package br.unicamp.mc851.evisita.endpoint.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AcompanhanteVM {
+public class AcompanhanteResponse {
     private String cpf;
     private String rg;
     private String nome;

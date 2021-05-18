@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,9 @@ public class GetAcompanhantesImpl implements GetAcompanhantes {
 
     @Override
     public List<Acompanhante> execute() {
-        return AcompanhanteModelAdapter.modelListToEntityList(repository.findAll());
+        var acompanhanteModelList = repository.findAll();
+        return acompanhanteModelList.stream()
+                .map(AcompanhanteModelAdapter::modelToEntity)
+                .collect(Collectors.toList());
     }
 }

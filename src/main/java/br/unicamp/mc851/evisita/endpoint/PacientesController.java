@@ -1,9 +1,9 @@
 package br.unicamp.mc851.evisita.endpoint;
 
-import br.unicamp.mc851.evisita.usecase.GetPacientesVM;
-import br.unicamp.mc851.evisita.usecase.SavePacientesVM;
-import br.unicamp.mc851.evisita.viewmodel.PacienteVM;
-import br.unicamp.mc851.evisita.viewmodel.adapter.PacienteVMAdapter;
+import br.unicamp.mc851.evisita.endpoint.dto.PacienteRequest;
+import br.unicamp.mc851.evisita.endpoint.dto.PacienteResponse;
+import br.unicamp.mc851.evisita.usecase.GetPacientesResponse;
+import br.unicamp.mc851.evisita.usecase.SavePacientesRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,18 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/pacientes",
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "pacientes", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class PacientesController {
 
-    private final SavePacientesVM savePacientesVM;
-    private final GetPacientesVM getPacientesVM;
+    private final SavePacientesRequest savePacientesRequest;
+    private final GetPacientesResponse getPacientesResponse;
 
     @GetMapping
     public ResponseEntity<Object> getPacientes() {
-        List<PacienteVM> pacienteVMS = getPacientesVM.execute();
+        List<PacienteResponse> pacienteVMS = getPacientesResponse.execute();
         if (pacienteVMS.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
@@ -32,13 +30,12 @@ public class PacientesController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<PacienteVM> createPaciente(
-            @RequestBody PacienteVM pacienteVM) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> createPaciente(
+            @RequestBody PacienteRequest pacienteRequest) {
 
-        var paciente = savePacientesVM.execute(PacienteVMAdapter.viewModelToEntity(pacienteVM));
-        var result = PacienteVMAdapter.entityToViewModel(paciente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        var pacienteResponse = savePacientesRequest.execute(pacienteRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteResponse);
     }
 
 }

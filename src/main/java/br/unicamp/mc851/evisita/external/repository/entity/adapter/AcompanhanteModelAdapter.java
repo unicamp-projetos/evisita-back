@@ -1,16 +1,10 @@
 package br.unicamp.mc851.evisita.external.repository.entity.adapter;
 
 import br.unicamp.mc851.evisita.entity.Acompanhante;
-import br.unicamp.mc851.evisita.entity.Paciente;
 import br.unicamp.mc851.evisita.external.repository.entity.AcompanhanteModel;
-import br.unicamp.mc851.evisita.external.repository.entity.PacienteModel;
 import lombok.NonNull;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AcompanhanteModelAdapter {
@@ -22,17 +16,11 @@ public class AcompanhanteModelAdapter {
                 .cpf(acompanhanteModel.getCpf())
                 .nome(acompanhanteModel.getNome())
                 .rg(acompanhanteModel.getRg())
-                .pacientes(getPacientesList(acompanhanteModel.getPacientes()))
+                .pacientes(acompanhanteModel.getPacientes().stream()
+                    .map(PacienteModelAdapter::modelToEntity)
+                    .collect(Collectors.toList())
+                )
                 .build();
-    }
-
-    private static List<Paciente> getPacientesList(@NonNull Set<PacienteModel> pacienteModels) {
-        if (pacienteModels.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return pacienteModels.stream()
-                .map(PacienteModelAdapter::modelToEntity)
-                .collect(Collectors.toList());
     }
 
     public static AcompanhanteModel entityToModel(@NonNull Acompanhante acompanhante) {
@@ -42,26 +30,10 @@ public class AcompanhanteModelAdapter {
                 .dataCriacao(LocalDateTime.now())
                 .nome(acompanhante.getNome())
                 .rg(acompanhante.getRg())
-                .pacientes(getPacientesSet(acompanhante.getPacientes()))
+                .pacientes(acompanhante.getPacientes().stream()
+                    .map(PacienteModelAdapter::entityToModel)
+                    .collect(Collectors.toSet())
+                )
                 .build();
-    }
-
-    private static Set<PacienteModel> getPacientesSet(@NonNull List<Paciente> pacientes) {
-        if (pacientes.isEmpty()) {
-            return new HashSet<>();
-        }
-        return pacientes.stream()
-                .map(PacienteModelAdapter::entityToModel)
-                .collect(Collectors.toSet());
-
-    }
-
-    public static List<Acompanhante> modelListToEntityList(@NonNull List<AcompanhanteModel> acompanhanteModels) {
-        if (acompanhanteModels.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return acompanhanteModels.stream()
-                .map(AcompanhanteModelAdapter::modelToEntity)
-                .collect(Collectors.toList());
     }
 }

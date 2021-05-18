@@ -1,14 +1,14 @@
 package br.unicamp.mc851.evisita.builder;
 
-import br.unicamp.mc851.evisita.viewmodel.PacienteVM;
+import br.unicamp.mc851.evisita.endpoint.dto.PacienteRequest;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class PacienteVMBuilder {
+public class PacienteRequestBuilder {
 
-    private static PacienteVM buildPacienteVMMock() {
-        return PacienteVM.builder()
+    private static PacienteRequest buildPacienteVMMock() {
+        return PacienteRequest.builder()
                 .cpf("12345678910")
                 .cadastroSus("123456789")
                 .nome("Nome")
@@ -20,7 +20,7 @@ public class PacienteVMBuilder {
                 .build();
     }
 
-    public static List<PacienteVM> buildPacientesVMMock() {
+    public static List<PacienteRequest> buildPacientesVMMock() {
         return Arrays.asList(buildPacienteVMMock());
     }
 }

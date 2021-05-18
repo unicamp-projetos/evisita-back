@@ -1,16 +1,10 @@
 package br.unicamp.mc851.evisita.external.repository.entity.adapter;
 
-import br.unicamp.mc851.evisita.entity.Acompanhante;
 import br.unicamp.mc851.evisita.entity.Paciente;
-import br.unicamp.mc851.evisita.external.repository.entity.AcompanhanteModel;
 import br.unicamp.mc851.evisita.external.repository.entity.PacienteModel;
 import lombok.NonNull;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PacienteModelAdapter {
@@ -19,7 +13,10 @@ public class PacienteModelAdapter {
 
     public static Paciente modelToEntity(@NonNull PacienteModel pacienteModel) {
         return Paciente.builder()
-                .acompanhantes(getAcompanhantesList(pacienteModel.getAcompanhantes()))
+                .acompanhantes(pacienteModel.getAcompanhantes().stream()
+                    .map(AcompanhanteModelAdapter::modelToEntity)
+                    .collect(Collectors.toList())
+                )
                 .cpf(pacienteModel.getCpf())
                 .cadastroSus(pacienteModel.getCadastroSus())
                 .medico(pacienteModel.getMedico())
@@ -31,18 +28,12 @@ public class PacienteModelAdapter {
                 .build();
     }
 
-    private static List<Acompanhante> getAcompanhantesList(@NonNull Set<AcompanhanteModel> acompanhanteModels) {
-        if (acompanhanteModels.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return acompanhanteModels.stream()
-                .map(AcompanhanteModelAdapter::modelToEntity)
-                .collect(Collectors.toList());
-    }
-
     public static PacienteModel entityToModel(@NonNull Paciente paciente) {
         return PacienteModel.builder()
-                .acompanhantes(getAcompanhantesSet(paciente.getAcompanhantes()))
+                .acompanhantes(paciente.getAcompanhantes().stream()
+                    .map(AcompanhanteModelAdapter::entityToModel)
+                    .collect(Collectors.toSet())
+                )
                 .cpf(paciente.getCpf())
                 .cadastroSus(paciente.getCadastroSus())
                 .dataAtualizacao(LocalDateTime.now())
@@ -54,23 +45,5 @@ public class PacienteModelAdapter {
                 .prontuario(paciente.getProntuario())
                 .quarto(paciente.getQuarto())
                 .build();
-    }
-
-    private static Set<AcompanhanteModel> getAcompanhantesSet(@NonNull List<Acompanhante> acompanhantes) {
-        if (acompanhantes.isEmpty()) {
-            return new HashSet<>();
-        }
-        return acompanhantes.stream()
-                .map(AcompanhanteModelAdapter::entityToModel)
-                .collect(Collectors.toSet());
-    }
-
-    public static List<Paciente> modelListToEntityList(@NonNull List<PacienteModel> pacienteModels) {
-        if (pacienteModels.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return pacienteModels.stream()
-                .map(PacienteModelAdapter::modelToEntity)
-                .collect(Collectors.toList());
     }
 }

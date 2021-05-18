@@ -8,8 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "acompanhante")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -21,6 +20,8 @@ public class AcompanhanteModel {
     private String nome;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
-    @ManyToMany(mappedBy = "acompanhantes", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "acompanhantes",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     Set<PacienteModel> pacientes;
 }
