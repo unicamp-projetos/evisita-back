@@ -3,6 +3,7 @@ package br.unicamp.mc851.evisita.endpoint;
 import br.unicamp.mc851.evisita.builder.PacienteRequestBuilder;
 import br.unicamp.mc851.evisita.endpoint.dto.PacienteRequest;
 import br.unicamp.mc851.evisita.endpoint.dto.PacienteResponse;
+import br.unicamp.mc851.evisita.usecase.GetPacienteByIdResponse;
 import br.unicamp.mc851.evisita.usecase.GetPacientesResponse;
 import br.unicamp.mc851.evisita.usecase.SavePacientesRequest;
 import br.unicamp.mc851.evisita.usecase.adapter.PacienteAdapter;
@@ -17,21 +18,24 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class PacientesControllerTest {
+class PacientesControllerTest {
 
     private GetPacientesResponse getPacientesResponse;
     private SavePacientesRequest savePacientesRequest;
+    private GetPacienteByIdResponse getPacienteByIdResponse;
     private PacientesController controller;
 
     @BeforeEach
     public void setUp() {
         getPacientesResponse = mock(GetPacientesResponse.class);
         savePacientesRequest = mock(SavePacientesRequest.class);
-        controller = new PacientesController(savePacientesRequest, getPacientesResponse);
+        getPacienteByIdResponse = mock(GetPacienteByIdResponse.class);
+        controller = new PacientesController(savePacientesRequest,
+                getPacientesResponse, getPacienteByIdResponse);
     }
 
     @Test
-    public void shouldReturnPacientesVMSWithOkStatusWhenCalledWithAtLeastOnePacienteInDatabase() {
+    void shouldReturnPacientesVMSWithOkStatusWhenCalledWithAtLeastOnePacienteInDatabase() {
         var pacienteRequests = PacienteRequestBuilder.buildPacientesVMMock();
         var pacienteResponseList = pacienteRequests.stream()
                 .map(PacienteAdapter::requestToEntity)
@@ -52,7 +56,7 @@ public class PacientesControllerTest {
     }
 
     @Test
-    public void shouldReturNoContentHttpStatusWhenCalledWithoutAnyPacientesInDatabase() {
+    void shouldReturNoContentHttpStatusWhenCalledWithoutAnyPacientesInDatabase() {
         when(getPacientesResponse.execute()).thenReturn(new ArrayList<PacienteResponse>());
         var responseEntity = controller.getPacientes();
 

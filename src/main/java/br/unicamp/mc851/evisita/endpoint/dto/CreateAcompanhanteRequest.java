@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.lang.NonNull;
 
 import java.util.List;
 
@@ -12,5 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateAcompanhanteRequest extends AcompanhanteRequest {
+    @NonNull
     private List<String> prontuarios;
 }
