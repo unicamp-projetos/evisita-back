@@ -13,10 +13,6 @@ public class PacienteModelAdapter {
 
     public static Paciente modelToEntity(@NonNull PacienteModel pacienteModel) {
         return Paciente.builder()
-                .acompanhantes(pacienteModel.getAcompanhantes().stream()
-                    .map(AcompanhanteModelAdapter::modelToEntity)
-                    .collect(Collectors.toList())
-                )
                 .cpf(pacienteModel.getCpf())
                 .cadastroSus(pacienteModel.getCadastroSus())
                 .medico(pacienteModel.getMedico())

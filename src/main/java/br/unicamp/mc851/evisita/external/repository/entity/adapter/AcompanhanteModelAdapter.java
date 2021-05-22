@@ -16,10 +16,6 @@ public class AcompanhanteModelAdapter {
                 .cpf(acompanhanteModel.getCpf())
                 .nome(acompanhanteModel.getNome())
                 .rg(acompanhanteModel.getRg())
-                .pacientes(acompanhanteModel.getPacientes().stream()
-                    .map(PacienteModelAdapter::modelToEntity)
-                    .collect(Collectors.toList())
-                )
                 .build();
     }
 

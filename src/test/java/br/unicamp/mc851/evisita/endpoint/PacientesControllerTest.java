@@ -35,7 +35,7 @@ class PacientesControllerTest {
     }
 
     @Test
-    void shouldReturnPacientesVMSWithOkStatusWhenCalledWithAtLeastOnePacienteInDatabase() {
+    void shouldReturnPacientesResponseWithOkStatusWhenCalledWithAtLeastOnePacienteInDatabase() {
         var pacienteRequests = PacienteRequestBuilder.buildPacientesVMMock();
         var pacienteResponseList = pacienteRequests.stream()
                 .map(PacienteAdapter::requestToEntity)
@@ -49,9 +49,9 @@ class PacientesControllerTest {
         verify(getPacientesResponse, times(1)).execute();
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        var body = (List<PacienteRequest>) responseEntity.getBody();
+        var body = (List<PacienteResponse>) responseEntity.getBody();
         assertEquals(1, body.size());
-        assertEquals(pacienteRequests, body);
+        assertEquals(pacienteResponseList, body);
 
     }
 
