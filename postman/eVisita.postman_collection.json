@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "88add1ee-a51c-4402-baa0-773bcb4623e2",
+		"name": "eVisita",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello controller",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/hello",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hello"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pacientes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/pacientes/v1/pacientes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pacientes",
+						"v1",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Paciente Natan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"acompanhantes\": [\r\n      {\r\n          \"cpf\": \"11\",\r\n          \"rg\": \"123456789\",\r\n          \"nome\": \"Mae do Natan\"\r\n      },\r\n      {\r\n          \"cpf\": \"21\",\r\n          \"rg\": \"123456789\",\r\n          \"nome\": \"Compartilhado\"\r\n      }\r\n  ],\r\n  \"cadastroSus\": \"1\",\r\n  \"cpf\": \"12345678910\",\r\n  \"medico\": \"Dr Medico\",\r\n  \"nome\": \"Natan\",\r\n  \"nomeMae\": \"Noma Mae\",\r\n  \"prontuario\": \"2\",\r\n  \"quarto\": \"123A\",\r\n  \"rg\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/pacientes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Paciente Mauricio",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"acompanhantes\": [\r\n      {\r\n          \"cpf\": \"31\",\r\n          \"rg\": \"123456789\",\r\n          \"nome\": \"Mae do Mauricio\"\r\n      },\r\n      {\r\n          \"cpf\": \"21\",\r\n          \"rg\": \"123456789\",\r\n          \"nome\": \"Compartilhado\"\r\n      }\r\n  ],\r\n  \"cadastroSus\": \"1\",\r\n  \"cpf\": \"12345678910\",\r\n  \"medico\": \"Dr Medico\",\r\n  \"nome\": \"Mauricio\",\r\n  \"nomeMae\": \"Noma Mae\",\r\n  \"prontuario\": \"3\",\r\n  \"quarto\": \"123A\",\r\n  \"rg\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/pacientes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Acompanhente por cpf",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/acompanhantes/v1/acompanhante/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acompanhantes",
+						"v1",
+						"acompanhante",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Paciente por prontuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/pacientes/v1/paciente/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pacientes",
+						"v1",
+						"paciente",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar acompanhante no Natan",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Novo Acompanhante do Natan\",\r\n    \"cpf\": \"12\",\r\n    \"rg\": \"123456789\",\r\n    \"prontuarios\": [\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/acompanhantes/v1/acompanhante",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acompanhantes",
+						"v1",
+						"acompanhante"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
